@@ -18,7 +18,7 @@ class BorrowForm(forms.Form):
     max_length = 20,
     required = True,
     widget = forms.TextInput(),
-    #widget = request.username,
+    #widget = request.user,
   )
 
 class NewForm(forms.Form):
