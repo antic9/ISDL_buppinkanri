@@ -1,6 +1,7 @@
 from django.db import models
 
 class Equipment(models.Model):
+    
   # eq_type
   BOOK = 1
   DEVICE = 2
@@ -9,14 +10,14 @@ class Equipment(models.Model):
   # state
   NOT_ON_LOAN = 0
   ON_LOAN = 1
+  REQUESTING = 2
   
   name = models.CharField(max_length=50)
   eq_type = models.IntegerField()
-  owner = models.CharField(max_length=20)
-  state = models.IntegerField()
-  due = models.DateField(auto_now = False, auto_now_add = False)
-  borrower = models.CharField(max_length=20, )
-  remark = models.TextField()
+  owner = models.CharField(max_length=20,default = "ISDL")
+  state = 0
+  borrower = ""
+  remark = models.TextField(null= True,blank=True)
 
   def __str__(self):
     return self.name
@@ -28,3 +29,9 @@ class User(models.Model):
   def __str__(self):
     return self.name
 
+class bunrui(models.Model):
+    name = models.CharField(max_length=50)
+    id = models.IntegerField
+
+    def __str__(self):
+        return self.name

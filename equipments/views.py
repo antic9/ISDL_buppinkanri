@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 
-from slacker import Slacker
+# from slacker import Slacker
 
 import datetime
 import os, sys
@@ -16,16 +16,16 @@ import config
 
 CHANNEL_ID = 'G8XP0KUNQ'
 
-class Slack(object):
-  __slacker = None
+# class Slack(object):
+#   __slacker = None
 
-  def __init__(self, token):
-    self.__slacker = Slacker(token)
+#   def __init__(self, token):
+#     self.__slacker = Slacker(token)
 
-  def post_to_channel(self, channel, message):
-    self.__slacker.chat.post_message(CHANNEL_ID, message)
+#   def post_to_channel(self, channel, message):
+#     self.__slacker.chat.post_message(CHANNEL_ID, message)
 
-slack = Slack(config.slack_token)
+# slack = Slack(config.slack_token)
 
 def index(request):
   equipment_list = Equipment.objects.all()
@@ -49,15 +49,10 @@ def act(request, equipment_id):
 
   if request.POST['action'] == 'borrowing':
     if temp.state == 0:
-      dueday = datetime.date.today() + datetime.timedelta(days=13)
 
       temp.borrower = request.POST['name']
       temp.state = 1
-      temp.due = dueday
       temp.save()
-
-      pm = temp.borrower + "が" + temp.name + "を貸出しました。返却期限は" + str(temp.due) + "です。"
-      slack.post_to_channel('bot_test', pm)
 
     return HttpResponseRedirect(reverse('equipments:index'))
 
@@ -65,7 +60,7 @@ def act(request, equipment_id):
     if temp.borrower == request.POST['name']:
 
       pm = temp.borrower + "が" + temp.name + "を返却しました。"
-      slack.post_to_channel('bot_test', pm)
+      # slack.post_to_channel('bot_test', pm)
        
       temp.borrower = ""
       temp.state = 0
@@ -75,15 +70,7 @@ def act(request, equipment_id):
 
   if request.POST['action'] == 'extension':
     if temp.borrower == request.POST['name']:
-      if temp.due < datetime.date.today():
-        dueday = datetime.date.today() + datetime.timedelta(days=7)
-      else:
-        dueday = temp.due + datetime.timedelta(days=7)
-      temp.due = dueday
       temp.save()
-
-      pm = temp.borrower + "が" + temp.name + "の貸出を延長しました。返却期限は" + str(temp.due) + "です。"
-      slack.post_to_channel('bot_test', pm)
 
     return HttpResponseRedirect(reverse('equipments:index'))
   return HttpResponseRedirect(reverse('equipments:index'))
@@ -103,7 +90,6 @@ def create(request):
     eq_type=request.POST['eq_type'], 
     state=0,
     owner='',
-    due=datetime.date.today(), 
     remark=request.POST['remark']
     )
   temp.save()

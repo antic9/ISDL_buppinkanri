@@ -1,6 +1,6 @@
 {% extends "equipments/base.html" %}
-{% block title %}{{ equipment.name }} - Comb App{% endblock %}
-{% load staticfiles %}
+{% block title %}{{ equipment.name }} - ISDL{% endblock %}
+{% load static %}
 
   {%block body %}
     <div id="wrapper">
@@ -22,7 +22,6 @@
                     <tr>
                       <th>Owner</th>
                       <th>State</th>
-                      <th>Due</th>
                       <th>Borrower</th>
                       <th>Remark</th>
                     </tr>
@@ -31,16 +30,13 @@
                     <tr>
                       <td>{{equipment.owner}}</td>
                       {% if equipment.state == 0 %}
-                        <td>NOT_ON_LOAN</td>
+                        <td>貸出可能</td>
+                      {% elif equipment.state == 2 %}
+                        <td>申請中</td>
                       {% else %}
-                        <td>ON_LOAN</td>
+                        <td>貸出中</td>
                       {% endif %}
-                      {% if equipment.state == 1 %}
-                        <td>{{equipment.due}}</td>
-                      {% else %}
-                        <td> </td>
-                      {% endif %}
-                      {% if equipment.borrower != 'None' %}
+                      {% if equipment.borrower != 'None'%}
                         <td>{{equipment.borrower}}</td>
                       {% endif %}
                       <td>{{equipment.remark}}</td>

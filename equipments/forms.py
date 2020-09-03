@@ -1,5 +1,6 @@
 from django import forms
 
+
 class BorrowForm(forms.Form):
   ACTION_CHOICES = (
     ('borrowing', 'Borrow'),
@@ -17,6 +18,7 @@ class BorrowForm(forms.Form):
     max_length = 20,
     required = True,
     widget = forms.TextInput(),
+    #widget = request.username,
   )
 
 class NewForm(forms.Form):

@@ -14,7 +14,7 @@
 django_key = 'XXXXXXXXXXXXXXXXXXXXXXXXX'
 
 #Slackのトークン
-slack_token = 'XXXXXXXXXXXXXXXXXXXXXXXXX'
+# slack_token = 'XXXXXXXXXXXXXXXXXXXXXXXXX'
 ```
 4. `./manage.py migrate`
 5. `./manage.py runserver`
