@@ -1,5 +1,12 @@
 from django.db import models
 
+class Bunrui(models.Model):
+    name = models.CharField(max_length=50)
+    id = models.IntegerField
+
+    def __str__(self):
+        return self.name
+        
 class Equipment(models.Model):
     
   # eq_type
@@ -29,9 +36,3 @@ class User(models.Model):
   def __str__(self):
     return self.name
 
-class Bunrui(models.Model):
-    name = models.CharField(max_length=50)
-    id = models.IntegerField
-
-    def __str__(self):
-        return self.name
