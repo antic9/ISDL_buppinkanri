@@ -29,7 +29,7 @@ class User(models.Model):
   def __str__(self):
     return self.name
 
-class bunrui(models.Model):
+class Bunrui(models.Model):
     name = models.CharField(max_length=50)
     id = models.IntegerField
 
