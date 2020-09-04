@@ -49,18 +49,22 @@ def act(request, equipment_id):
 
   if request.POST['action'] == 'borrowing':
     if temp.state == 0:
-
-      temp.borrower = request.POST['name']
       temp.state = 1
+      temp.remark = request.POST['name']
+      userf = request.user.first_name
+      userl = request.user.last_name
+      username = userf+userl
+      temp.borrower = username
       temp.save()
+
 
     return HttpResponseRedirect(reverse('equipments:index'))
 
   if request.POST['action'] == 'returning':
-    if temp.borrower == request.POST['name']:
-
-      pm = temp.borrower + "が" + temp.name + "を返却しました。"
-      # slack.post_to_channel('bot_test', pm)
+    userf = request.user.first_name
+    userl = request.user.last_name
+    username = userf+userl
+    if temp.borrower == username:
        
       temp.borrower = ""
       temp.state = 0
@@ -68,11 +72,11 @@ def act(request, equipment_id):
 
     return HttpResponseRedirect(reverse('equipments:index'))
 
-  if request.POST['action'] == 'extension':
-    if temp.borrower == request.POST['name']:
-      temp.save()
+  # if request.POST['action'] == 'extension':
+  #   if temp.borrower == request.POST['name']:
+  #     temp.save()
 
-    return HttpResponseRedirect(reverse('equipments:index'))
+  #   return HttpResponseRedirect(reverse('equipments:index'))
   return HttpResponseRedirect(reverse('equipments:index'))
 
 def new(request):

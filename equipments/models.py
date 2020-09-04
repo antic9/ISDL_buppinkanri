@@ -7,13 +7,13 @@ class Bunrui(models.Model):
     def __str__(self):
         return self.name
         
-class Equipment(models.Model):
+class Equipment(models.Model):\
 
   name = models.CharField(max_length=50)
   owner = models.CharField(max_length=20,default = "ISDL")
   bunrui = models.ForeignKey(Bunrui, on_delete=models.CASCADE, default='')
+  borrower = models.TextField(null= True,blank=True,default='')
   state = models.IntegerField(default=0)
-  borrower = ""
   remark = models.TextField(null= True,blank=True)
 
   def __str__(self):

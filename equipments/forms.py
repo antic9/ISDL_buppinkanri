@@ -5,7 +5,7 @@ class BorrowForm(forms.Form):
   ACTION_CHOICES = (
     ('borrowing', 'Borrow'),
     ('returning', 'Return'),
-    ('extension', 'Extend'),
+    # ('extension', 'Extend'),
   )
   action = forms.ChoiceField(
     label = 'Action',
@@ -14,9 +14,9 @@ class BorrowForm(forms.Form):
     required = True,
   )
   name = forms.CharField(
-    label = 'Name',
+    label = '備考',
     max_length = 20,
-    required = True,
+    required = False,
     widget = forms.TextInput(),
     #widget = request.user,
   )
