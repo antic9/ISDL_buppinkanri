@@ -33,12 +33,12 @@ class NewForm(forms.Form):
     required = True,
     widget = forms.TextInput(),
   )
-  eq_type = forms.ChoiceField(
-    label = '種別',
-    widget = forms.RadioSelect,
-    choices = TYPE_CHOICES,
-    required = True,
-  )
+  # eqtype = forms.ChoiceField(
+  #   label = '種別',
+  #   widget = forms.RadioSelect,
+  #   choices = TYPE_CHOICES,
+  #   required = True,
+  # )
   remark = forms.CharField(
     label = '備考',
     widget = forms.Textarea(),

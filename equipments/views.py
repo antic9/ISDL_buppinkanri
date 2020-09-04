@@ -87,7 +87,7 @@ def new(request):
 def create(request):
   temp = Equipment(
     name=request.POST['name'], 
-    eq_type=request.POST['eq_type'], 
+    bunrui=request.POST['bunrui'], 
     state=0,
     owner='',
     remark=request.POST['remark']

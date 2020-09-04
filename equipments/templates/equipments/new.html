@@ -7,7 +7,7 @@
     <form class="form-group" method="post" action="{% url 'equipments:create' %}">
       {% csrf_token %}
       <label>{{ form.name.label }} {{ form.name }}</label><br>
-      <label>{{ form.eq_type.label }} {{ form.eq_type }}</label><br>
+      <label>{{ form.eqtype.label }} {{ form.eqtype }}</label><br>
       <label>{{ form.remark.label }} {{ form.remark }}</label><br>
 
       <input type="submit" value="追加">
