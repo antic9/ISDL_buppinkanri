@@ -1,11 +1,12 @@
 from django import forms
+# from django.contrib.auth.models import User
 
 
 class BorrowForm(forms.Form):
   ACTION_CHOICES = (
-    ('borrowing', 'Borrow'),
-    ('returning', 'Return'),
-    ('extension', 'Extend'),
+    ('borrowing', '貸出'),
+    ('returning', '返却'),
+    #('extension', 'Extend'),
   )
   action = forms.ChoiceField(
     label = 'Action',
@@ -14,9 +15,9 @@ class BorrowForm(forms.Form):
     required = True,
   )
   name = forms.CharField(
-    label = 'Name',
-    max_length = 20,
-    required = True,
+    label = '備考',
+    max_length = 50,
+    required = False,
     widget = forms.TextInput(),
     #widget = request.user,
   )

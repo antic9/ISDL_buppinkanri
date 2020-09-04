@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
-from django.urls import reverse
+from django.urls import reverse\
 
 # from slacker import Slacker
 
@@ -49,30 +49,35 @@ def act(request, equipment_id):
 
   if request.POST['action'] == 'borrowing':
     if temp.state == 0:
+      temp.remark = request.POST['name']
+      userf = request.user.first_name
+      userl = request.user.last_name
+      username = userf+userl
+      temp.borrower = username
+      # temp.borrower = request.POST['name']
 
-      temp.borrower = request.POST['name']
       temp.state = 1
       temp.save()
 
     return HttpResponseRedirect(reverse('equipments:index'))
 
   if request.POST['action'] == 'returning':
-    if temp.borrower == request.POST['name']:
-
-      pm = temp.borrower + "が" + temp.name + "を返却しました。"
-      # slack.post_to_channel('bot_test', pm)
-       
+    userf = request.user.first_name
+    userl = request.user.last_name
+    username = userf+userl
+    if temp.borrower == username:
       temp.borrower = ""
-      temp.state = 0
+      temp.remark = ""
+      temp.state = 2
       temp.save()
 
     return HttpResponseRedirect(reverse('equipments:index'))
 
-  if request.POST['action'] == 'extension':
-    if temp.borrower == request.POST['name']:
-      temp.save()
+  # if request.POST['action'] == 'extension':
+  #   if temp.borrower == request.POST['name']:
+  #     temp.save()
 
-    return HttpResponseRedirect(reverse('equipments:index'))
+    # return HttpResponseRedirect(reverse('equipments:index'))
   return HttpResponseRedirect(reverse('equipments:index'))
 
 def new(request):
@@ -86,8 +91,8 @@ def new(request):
 
 def create(request):
   temp = Equipment(
-    name=request.POST['name'], 
-    eq_type=request.POST['eq_type'], 
+    name=request.POST['name'],
+    eq_type=request.POST['eq_type'],
     state=0,
     owner='',
     remark=request.POST['remark']
@@ -95,3 +100,11 @@ def create(request):
   temp.save()
 
   return HttpResponseRedirect(reverse('equipments:index'))
+
+def approve(request):
+  equipment_list = Equipment.objects.filter(state=1)
+
+  context = {
+    'equipment_list': equipment_list,
+  }
+  return render(request, 'equipments/approval.html', context)
