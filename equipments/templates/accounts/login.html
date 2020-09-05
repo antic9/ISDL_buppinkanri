@@ -24,10 +24,12 @@
 <body class="hold-transition login-page">
   <div class="login-box">
     <div class="login-logo">
-      <b>ISDL　物品借用管理</b>
+      <b>物品借用管理</b>
     </div>
     <!-- /.login-logo -->
-    <div class="login-box-body">
+    <div class="panel-body full-width full-height">
+
+    <div class="login-box-body"; style="width:800px; margin:0 auto;">
       <p class="login-box-msg"><b>ログイン画面</b></p>
 
       <form action="" method="POST">
@@ -38,7 +40,6 @@
           </div>
         {% endfor %}
         <div class="row">
-
           {% for error in form.non_field_errors %}
             <div class="alert alert-danger" role="alert">
               <p>{{ error }}</p>
@@ -51,6 +52,7 @@
           <!-- /.col -->
         </div>
       </form>
+    </div>
     </div>
     <!-- /.login-box-body -->
   </div>

@@ -102,7 +102,7 @@ def act(request, equipment_id):
       username = userf+userl
       temp.borrower = username
       now = datetime.datetime.now()
-      now += datetime.timedelta(seconds=30)
+      now += datetime.timedelta(minutes=15)
       temp.timestamp = now
       # temp.timestamp = datetime.datetime.now()
       # print("!!!!!!"+temp.timestamp)
@@ -118,7 +118,7 @@ def act(request, equipment_id):
     if temp.borrower == username:
       temp.state = 3
       now = datetime.datetime.now()
-      now += datetime.timedelta(seconds=30)
+      now += datetime.timedelta(minutes=15)
       temp.timestamp = now
       temp.save()
 
