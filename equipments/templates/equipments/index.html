@@ -31,8 +31,10 @@
                         <td>{{equipment.owner}}</td>
                         {% if equipment.state == 0 %}
                           <td>貸出可能</td>
-                        {% else %}
+                        {% elif equipment.state == 2 %}
                           <td>貸出中</td>
+                        {% else %}
+                          <td>申請中</td>
                         {% endif %}
                         {% if equipment.borrower != 'None' %}
                           <td>{{equipment.borrower}}</td>

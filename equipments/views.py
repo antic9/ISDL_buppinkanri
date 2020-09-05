@@ -1,10 +1,13 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
+from django.utils import timezone
+#from selenium import webdriver
 
 # from slacker import Slacker
 
 import datetime
+import pytz
 import os, sys
 
 current_dir = os.path.abspath(os.path.dirname(__file__))
@@ -29,9 +32,20 @@ CHANNEL_ID = 'G8XP0KUNQ'
 
 def index(request):
   equipment_list = Equipment.objects.all()
+  now = timezone.now()
+  for j in equipment_list:
+    print(j.timestamp <= now)
+    if j.timestamp <= now:
+      if j.state == 1:
+        print("changed status")
+        j.state = 0
+      elif j.state == 3:
+        print("changed status")
+        j.state = 2
   context = {
     'equipment_list': equipment_list,
   }
+  
   return render(request, 'equipments/index.html', context)
 
 def detail(request, equipment_id):
@@ -44,6 +58,38 @@ def detail(request, equipment_id):
   }
   return render(request, 'equipments/detail.html', context)
 
+def approval(request):
+  equipment_list = Equipment.objects.all()
+  now = timezone.now()
+  for j in equipment_list:
+    print(j.timestamp <= now)
+    if j.timestamp <= now:
+      if j.state == 1:
+        print("changed status")
+        j.state = 0
+      elif j.state == 3:
+        print("changed status")
+        j.state = 2
+  context = {
+    'equipment_list': equipment_list,
+  }
+  return render(request, 'equipments/approve.html', context)
+
+def approve(request, equipment_id):
+  temp = Equipment.objects.get(pk=equipment_id)  
+  temp.state = 2
+  temp.save()
+  #driver.refresh()
+  return HttpResponseRedirect(reverse('equipments:approval'))
+
+def returngoods(request, equipment_id):
+  temp = Equipment.objects.get(pk=equipment_id)  
+  temp.state = 0
+  temp.borrower=""
+  temp.save()
+  #driver.refresh()
+  return HttpResponseRedirect(reverse('equipments:approval'))
+
 def act(request, equipment_id):
   temp = Equipment.objects.get(pk=equipment_id)
 
@@ -55,6 +101,11 @@ def act(request, equipment_id):
       userl = request.user.last_name
       username = userf+userl
       temp.borrower = username
+      now = datetime.datetime.now()
+      now += datetime.timedelta(seconds=30)
+      temp.timestamp = now
+      # temp.timestamp = datetime.datetime.now()
+      # print("!!!!!!"+temp.timestamp)
       temp.save()
 
 
@@ -65,9 +116,10 @@ def act(request, equipment_id):
     userl = request.user.last_name
     username = userf+userl
     if temp.borrower == username:
-       
-      temp.borrower = ""
-      temp.state = 0
+      temp.state = 3
+      now = datetime.datetime.now()
+      now += datetime.timedelta(seconds=30)
+      temp.timestamp = now
       temp.save()
 
     return HttpResponseRedirect(reverse('equipments:index'))

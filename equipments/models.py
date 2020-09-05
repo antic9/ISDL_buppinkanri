@@ -15,6 +15,7 @@ class Equipment(models.Model):\
   borrower = models.TextField(null= True,blank=True,default='')
   state = models.IntegerField(default=0)
   remark = models.TextField(null= True,blank=True)
+  timestamp = models.DateTimeField(null= True,blank=True)
 
   def __str__(self):
     return self.name 
