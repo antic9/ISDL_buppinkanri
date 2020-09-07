@@ -134,3 +134,4 @@ STATICFILES_DIRS = (
 )
 LOGIN_URL = 'login/' 
 LOGIN_REDIRECT_URL = 'equipments/'
+LOGOUT_REDIRECT_URL='/login'

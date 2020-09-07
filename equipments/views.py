@@ -2,6 +2,9 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.utils import timezone
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.views import(LoginView, LogoutView)
+from .forms import LoginForm
 #from selenium import webdriver
 
 # from slacker import Slacker
@@ -39,9 +42,13 @@ def index(request):
       if j.state == 1:
         print("changed status")
         j.state = 0
+        j.borrower=""
+        j.remark=""
+        j.save()
       elif j.state == 3:
         print("changed status")
         j.state = 2
+        j.save()
   context = {
     'equipment_list': equipment_list,
   }
@@ -67,21 +74,22 @@ def approval(request):
       if j.state == 1:
         print("changed status")
         j.state = 0
+        j.borrower=""
+        j.remark=""
+        j.save()
       elif j.state == 3:
         print("changed status")
         j.state = 2
+        j.save()
   context = {
     'equipment_list': equipment_list,
   }
   return render(request, 'equipments/approve.html', context)
 
 def mylist(request):
-  userf = request.user.first_name
-  userl = request.user.last_name
-  username = userf+userl
-  equipment_list = Equipment.objects.filter(borrower = username)
+  equipment_list1 = Equipment.objects.all()
   now = timezone.now()
-  for j in equipment_list:
+  for j in equipment_list1:
     print(j.timestamp <= now)
     if j.timestamp <= now:
       if j.state == 1:
@@ -89,9 +97,15 @@ def mylist(request):
         j.state = 0
         j.borrower=""
         j.remark=""
+        j.save()
       elif j.state == 3:
         print("changed status")
         j.state = 2
+        j.save()
+  userf = request.user.first_name
+  userl = request.user.last_name
+  username = userf+userl
+  equipment_list = Equipment.objects.filter(borrower = username)
   context = {
     'equipment_list': equipment_list,
   }
@@ -174,3 +188,15 @@ def create(request):
   temp.save()
 
   return HttpResponseRedirect(reverse('equipments:index'))
+
+
+
+class Login(LoginView):
+    """ログインページ"""
+    form_class = LoginForm
+    template_name = 'accounts/login.html'
+
+
+class Logout(LoginRequiredMixin, LogoutView):
+    """ログアウトページ"""
+    template_name = 'accounts/login.html'

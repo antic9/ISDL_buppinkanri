@@ -15,13 +15,13 @@
     <link href="{% static 'bootstrap/dist/css/sb-admin-2.css' %}" rel="stylesheet">
     <link href="{% static 'bootstrap/vendor/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
 
-    <script type="text/javascript" src="{% static 'bootstrap/vendor/jquery/jquery.min.js' %}"></script>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/jquery-ui.min.js"></script>
 
-    <script src="{% static 'bootstrap/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+
     <script src="{% static 'bootstrap/vendor/metisMenu/metisMenu.min.js' %}"></script>
     <script src="{% static 'bootstrap/vendor/datatables/js/jquery.dataTables.min.js' %}"></script>
-    <script src="{% static 'bootstrap/vendor/datatables-plugins/dataTables.bootstrap.min.js' %}"></script>
+
     <script src="{% static 'bootstrap/vendor/datatables-responsive/dataTables.responsive.js' %}"></script>
     <script src="{% static 'bootstrap/dist/js/sb-admin-2.js' %}"></script>
 
@@ -51,13 +51,14 @@
         <div class="navbar-default sidebar" role="navigation">
           <div class="sidebar-nav navbar-collapse">
             <ul class="nav" id="side-menu">
-              <li style="font-size:14px"><a href="/login/login/equipments/mylist/"><i class="fa fa-user-circle-o" aria-hidden="false"></i>{{request.user.first_name}}{{request.user.last_name}}さん</a></li>
-              <li><a href="/login/login/equipments/"><i class="fa fa-list" aria-hidden="true"></i>  物品一覧</a></li>
+              <li style="font-size:14px"><a href="/equipments/mylist/"><i class="fa fa-user-circle-o" aria-hidden="false"></i>{{request.user.first_name}}{{request.user.last_name}}さん</a></li>
+              <li><a href="/equipments/"><i class="fa fa-list" aria-hidden="true"></i>  物品一覧</a></li>
               {% if request.user.is_superuser %}
-                <li><a href="/login/login/equipments/approve/"><i class="fa fa-check-square-o" aria-hidden="true"></i>  承認ページ</a></li>
+                <li><a href="/equipments/approve/"><i class="fa fa-check-square-o" aria-hidden="true"></i>  承認ページ</a></li>
               {% endif %}
               <!-- <li><a href="/users/"><i class="fa fa-check-square-o" aria-hidden="true"></i>  Users</a></li> -->
-              <li><a href="/login/login/"><i class="fa fa-sign-out" aria-hidden="true"></i>  Logout</a></li>
+              <li><a href="/admin/"><i class="fa fa-user" aria-hidden="true"></i>  Admin</a></li>
+              <li><a href="/logout/"><i class="fa fa-sign-out" aria-hidden="true"></i>  Logout</a></li>
               <!-- <li><a href="/equipments/new/"><i class="fa fa-check-square-o" aria-hidden="true"></i>  備品の追加</a></li> 20200902 nikushima-->
             </ul>
           </div>
