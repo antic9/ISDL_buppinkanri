@@ -3,8 +3,8 @@ from django import forms
 
 class BorrowForm(forms.Form):
   ACTION_CHOICES = (
-    ('borrowing', 'Borrow'),
-    ('returning', 'Return'),
+    ('borrowing', '貸出'),
+    ('returning', '返却'),
     # ('extension', 'Extend'),
   )
   action = forms.ChoiceField(
@@ -15,7 +15,7 @@ class BorrowForm(forms.Form):
   )
   name = forms.CharField(
     label = '備考',
-    max_length = 20,
+    max_length = 50,
     required = False,
     widget = forms.TextInput(),
     #widget = request.user,

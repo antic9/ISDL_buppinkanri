@@ -87,6 +87,8 @@ def mylist(request):
       if j.state == 1:
         print("changed status")
         j.state = 0
+        j.borrower=""
+        j.remark=""
       elif j.state == 3:
         print("changed status")
         j.state = 2
