@@ -29,29 +29,6 @@
         font-family: 'Source Sans Pro', sans-serif;
         color: white;
         font-weight: 300;
-
-        ::-webkit-input-placeholder { /* WebKit browsers */
-            font-family: 'Source Sans Pro', sans-serif;
-                color:    white;
-            font-weight: 300;
-        }
-        :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-            font-family: 'Source Sans Pro', sans-serif;
-            color:    white;
-            opacity:  1;
-            font-weight: 300;
-        }
-        ::-moz-placeholder { /* Mozilla Firefox 19+ */
-            font-family: 'Source Sans Pro', sans-serif;
-            color:    white;
-            opacity:  1;
-            font-weight: 300;
-        }
-        :-ms-input-placeholder { /* Internet Explorer 10+ */
-            font-family: 'Source Sans Pro', sans-serif;
-            color:    white;
-            font-weight: 300;
-        }
     }
 
     .wrapper{
@@ -175,7 +152,7 @@
 
             -webkit-transition-timing-function: linear;
             transition-timing-function: linear;
-/* 
+/*
             &:nth-child(1){
                 left: 10%;
             } */
@@ -252,7 +229,7 @@
 
                 animation-delay: 11s;
             } */
-        }
+        /* }
     } */
 
     @-webkit-keyframes square {
@@ -269,16 +246,6 @@
   <title>ISDL-物品管理　ログイン画面</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <!-- Bootstrap 3.3.7 -->
-  <link rel="stylesheet" href="{% static 'AdminLTE-2.4.12/bower_components/bootstrap/dist/css/bootstrap.min.css' %}">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="{% static 'AdminLTE-2.4.12/bower_components/font-awesome/css/font-awesome.min.css' %}">
-  <!-- Ionicons -->
-  <link rel="stylesheet" href="{% static 'AdminLTE-2.4.12/bower_components/Ionicons/css/ionicons.min.css' %}">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="{% static 'AdminLTE-2.4.12/dist/css/AdminLTE.min.css' %}">
-  <!-- iCheck -->
-  <link rel="stylesheet" href="{% static 'AdminLTE-2.4.12/plugins/iCheck/square/blue.css' %}">
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
@@ -331,11 +298,8 @@
     <!-- /.login-box -->
   </div>
 
-  <!-- jQuery 3 -->
-  <script src="{% static 'AdminLTE-2.4.12/bower_components/jquery/dist/jquery.min.js' %}"></script>
-  <!-- Bootstrap 3.3.7 -->
-  <script src="{% static 'AdminLTE-2.4.12/bower_components/bootstrap/dist/js/bootstrap.min.js' %}"></script>
-  <!-- iCheck -->
-  <script src="{% static 'AdminLTE-2.4.12/plugins/iCheck/icheck.min.js' %}"></script>
+
+
+
 </body>
 </html>

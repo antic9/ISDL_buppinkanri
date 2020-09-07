@@ -1,4 +1,5 @@
 from django.db import models
+import datetime
 
 class Bunrui(models.Model):
     name = models.CharField(max_length=50)
@@ -15,7 +16,7 @@ class Equipment(models.Model):\
   borrower = models.TextField(null= True,blank=True,default='')
   state = models.IntegerField(default=0)
   remark = models.TextField(null= True,blank=True)
-  timestamp = models.DateTimeField(null= True,blank=True)
+  timestamp = models.DateTimeField(default=datetime.datetime.now())
 
   def __str__(self):
     return self.name 
