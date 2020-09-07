@@ -75,6 +75,26 @@ def approval(request):
   }
   return render(request, 'equipments/approve.html', context)
 
+def mylist(request):
+  userf = request.user.first_name
+  userl = request.user.last_name
+  username = userf+userl
+  equipment_list = Equipment.objects.filter(borrower = username)
+  now = timezone.now()
+  for j in equipment_list:
+    print(j.timestamp <= now)
+    if j.timestamp <= now:
+      if j.state == 1:
+        print("changed status")
+        j.state = 0
+      elif j.state == 3:
+        print("changed status")
+        j.state = 2
+  context = {
+    'equipment_list': equipment_list,
+  }
+  return render(request, 'equipments/mylist.html', context)
+
 def approve(request, equipment_id):
   temp = Equipment.objects.get(pk=equipment_id)  
   temp.state = 2
@@ -86,6 +106,7 @@ def returngoods(request, equipment_id):
   temp = Equipment.objects.get(pk=equipment_id)  
   temp.state = 0
   temp.borrower=""
+  temp.remark=""
   temp.save()
   #driver.refresh()
   return HttpResponseRedirect(reverse('equipments:approval'))
