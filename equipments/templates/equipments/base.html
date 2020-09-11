@@ -55,11 +55,9 @@
               <li><a href="/equipments/"><i class="fa fa-list" aria-hidden="true"></i>  物品一覧</a></li>
               {% if request.user.is_superuser %}
                 <li><a href="/equipments/approve/"><i class="fa fa-check-square-o" aria-hidden="true"></i>  承認ページ</a></li>
+                <li><a href="/admin/"><i class="fa fa-user" aria-hidden="true"></i>  Admin</a></li>
               {% endif %}
-              <!-- <li><a href="/users/"><i class="fa fa-check-square-o" aria-hidden="true"></i>  Users</a></li> -->
-              <li><a href="/admin/"><i class="fa fa-user" aria-hidden="true"></i>  Admin</a></li>
               <li><a href="/logout/"><i class="fa fa-sign-out" aria-hidden="true"></i>  Logout</a></li>
-              <!-- <li><a href="/equipments/new/"><i class="fa fa-check-square-o" aria-hidden="true"></i>  備品の追加</a></li> 20200902 nikushima-->
             </ul>
           </div>
         </div>
