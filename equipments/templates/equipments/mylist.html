@@ -27,7 +27,11 @@
                   <tbody>
                     {% for equipment in equipment_list %}
                         <tr>
-                        <td>{{equipment.name}}</td>
+                        <td>
+                          <a href="{% url 'equipments:detail' equipment.id %}">
+                            {{equipment.name}}
+                          </a>
+                        </td>
                         <td>{{equipment.borrower}}</td>
                         <td>{{equipment.remark}}</td> 
                         {% if equipment.state == 0 %}

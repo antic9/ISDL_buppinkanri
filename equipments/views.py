@@ -26,17 +26,6 @@ import config
 
 CHANNEL_ID = 'G8XP0KUNQ'
 
-# class Slack(object):
-#   __slacker = None
-
-#   def __init__(self, token):
-#     self.__slacker = Slacker(token)
-
-#   def post_to_channel(self, channel, message):
-#     self.__slacker.chat.post_message(CHANNEL_ID, message)
-
-# slack = Slack(config.slack_token)
-
 def index(request):
   equipment_list = Equipment.objects.all()
   now = timezone.now()
@@ -142,12 +131,6 @@ def act(request, equipment_id):
       temp.save()
 
     return HttpResponseRedirect(reverse('equipments:index'))
-
-  # if request.POST['action'] == 'extension':
-  #   if temp.borrower == request.POST['name']:
-  #     temp.save()
-
-  #   return HttpResponseRedirect(reverse('equipments:index'))
   return HttpResponseRedirect(reverse('equipments:index'))
 
 def new(request):
@@ -159,19 +142,9 @@ def new(request):
 
   return render(request, 'equipments/new.html', context)
 
-def create(request):
-  temp = Equipment(
-    name=request.POST['name'], 
-    bunrui=request.POST['bunrui'], 
-    state=0,
-    owner='',
-    remark=request.POST['remark']
-    )
-  temp.save()
 
-  return HttpResponseRedirect(reverse('equipments:index'))
 
-  class Login(LoginView):
+class Login(LoginView):
     """ログインページ"""
     form_class = LoginForm
     template_name = 'accounts/login.html'

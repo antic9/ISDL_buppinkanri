@@ -11,6 +11,4 @@ urlpatterns = [
   path('approve/<int:equipment_id>/return/',views.returngoods ,name='return'),
   path('<int:equipment_id>/', views.detail, name='detail'),
   path('<int:equipment_id>/act/', views.act, name='act'),
-  path('new/', views.new, name='new'),
-  path('create/', views.create, name='create'),
   ]

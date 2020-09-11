@@ -8,13 +8,11 @@
 1. `git clone https://github.com/hsm-hx/combapp`
 2. `cd combapp; touch config.py`
 3. config.pyに以下を記述します
+
 ``` python config.py
 # Djangoのシークレットキー
 # ジェネレーターなどを利用して任意の文字列を設定してください
 django_key = 'XXXXXXXXXXXXXXXXXXXXXXXXX'
-
-#Slackのトークン
-# slack_token = 'XXXXXXXXXXXXXXXXXXXXXXXXX'
 ```
 4. `./manage.py migrate`
 5. `./manage.py runserver`
