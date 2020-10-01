@@ -22,6 +22,32 @@ class BorrowForm(forms.Form):
     #widget = request.user,
   )
 
+class NewForm(forms.Form):
+  TYPE_CHOICES = (
+    (1, '書籍'),
+    (2, 'デバイス'),
+    (3, 'コンピュータ'),
+  )
+  name = forms.CharField(
+    label = '名称',
+    max_length = 50,
+    required = True,
+    widget = forms.TextInput(),
+  )
+  # eqtype = forms.ChoiceField(
+  #   label = '種別',
+  #   widget = forms.RadioSelect,
+  #   choices = TYPE_CHOICES,
+  #   required = True,
+  # )
+  remark = forms.CharField(
+    label = '備考',
+    widget = forms.Textarea(),
+    required = False,
+  )
+
+
+
 class LoginForm(AuthenticationForm):
     """ログオンフォーム"""
     def __init__(self, *args, **kwargs):

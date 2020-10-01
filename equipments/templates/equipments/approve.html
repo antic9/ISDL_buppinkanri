@@ -1,16 +1,14 @@
 {% extends "equipments/base.html" %}
-{% block title %}Approve - ISDL{% endblock %}
+{% block title %}承認ページ - ISDL{% endblock %}
 {% load static %}
 
   {%block body %}
     <div id="wrapper">
       <div id="page-wrapper">
         <div class="row">
-            <div class="panel panel-default full-width">
-              <div class="panel-body full-width full-height">
-                <!--  -->
-                <!-- <font size=5 >  承認物品一覧</font> -->
-                <h3 class="page-header">承認物品一覧</h3>
+            <div class="panel panel-default">
+                <h3 class="page-header">承認一覧</h3>
+
                 {% if error_message %}
                 <p><strong>{{ error_message }}</strong></p>
                 {% endif %}
@@ -21,7 +19,7 @@
                       <th>名前</th>
                       <th>貸出者</th>
                       <th>備考</th>
-                      <th>状況</th>
+                      <th>状態</th>
                       <th>承認</th>
                     </tr>
                   </thead>
@@ -37,26 +35,24 @@
                           <form action="{% url 'equipments:approve' equipment.id %}" method="post">
                             {% csrf_token %}
                             {{ form }}
-                            <div style="margin-left:5% ;margin-right:5%"><button type="submit" style="width:100%;"><font size=4.5>承認</font></button></div>
-                            
+                            <input type="submit" value="承認">
                           </form></td>
                         {% elif equipment.state == 3 %}
-                          <td >{{equipment.name}}</td>
+                          <td>{{equipment.name}}</td>
                           <td>{{equipment.borrower}}</td>
                           <td>{{equipment.remark}}</td>
                           <td>返却申請</td>
                           <td>
-                            
                             <form action="{% url 'equipments:return' equipment.id %}" method="post">
                               {% csrf_token %}
                               {{ form }}
-                              <div style="margin-left:5%; margin-right:5%"><button type="submit" style="width:100%;"><font size=4.5>承認</font></button></div>
+                              <div style="margin-left:5%; margin-right:5%"><button type="submit" style="width:100%;">承認</button></div>
                             </form></td>
                         {% endif %}
                         </tr>
-                    
+
                     {% endfor %}
-                    
+
                   </tbody>
                 </table>
                   </tbody>
@@ -80,8 +76,7 @@
                   </tbody>
                 </table>
 
-              </div>
-              
+
             </div>
         </div>
       </div>
